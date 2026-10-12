@@ -1,69 +1,82 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import StudyCard from "./components/StudyCard";
+// import HomeAnimations from "./components/HomeAnimations";
+import {  studyData,} from "@/data/studyData";
+import styles from "./page.module.scss";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
+    <main className={styles.main}>
+      {/* <HomeAnimations /> */}
+      <section className={styles.hero}>
+        <p className={styles.smallTitle}>
+          NEXT PROJECT 1
+        </p>
+
+        <h1>
+          Next.js 기반
+          <br />
+            AI 활용 <span className={styles.waveWord}>
+              <span className={styles.waveText}>React.js</span>
+              <span aria-hidden="true">
+                {Array.from("React.js").map((letter, index) => (
+                  <span className={styles.waveLetter} key={index}>{letter}</span>
+                ))}
+              </span>
+            </span> 학습 site
+        </h1>
+
+        <p className={styles.description}>
+              OpenAI를 활용하여 React.js 학습을 서비스 합니다
+          </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2>AI 학습 구성</h2>
+
+        <div className={styles.cardList}>
+          {studyData.map((item) => (
+            <StudyCard
+              key={item.id}
+              item={item}
+            />
+          ))}
+        </div>
+
+        <Link
+          href="/study"
+          className={styles.button}
+         
+        >
+          AI 학습 바로가기
+        </Link>
+      </section>
+
+      <section className={styles.weatherSection}>
+        <div>
+          <span>
+              Tailwind CSS , OPEN WEATHER API 
+          </span>
+
+          <h2>
+              Tailwind CSS 디자인된  지역별 날씨 확인 PAGE
+          </h2>
+
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            Tatilwind CSS 를  사용하여 리디자인 한 페이지<br />
+            도시를 검색하여 현재 온도, 습도, 풍속을 확인합니다.
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <Link
+          href="/weather"
+          className={styles.weatherButton}
+        >
+          날씨 확인 바로가기
+        </Link>
+      </section>
+    </main>
   );
-}
+};
+
+export default HomePage;
