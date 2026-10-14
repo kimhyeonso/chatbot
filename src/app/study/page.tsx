@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useActionState, useState } from "react"
 import { studyData } from "@/data/studyData"
 import type { AiResponse, Studymode } from '@/types/study'
 import styles from './page.module.scss'
@@ -13,9 +13,13 @@ import styles from './page.module.scss'
 
 const StudyPage = () => {
     const [mode, setMode] = useState<Studymode>('explain');
-    const [message, setMessage] = useState('')
-    const [answer, setAnswer] = useState('')
+    const [message, setMessage] = useState('') //사용자의 질문
+    const [answer, setAnswer] = useState('') // 답변
     const [loading, setLoading] = useState(false)
+    const [quizAnswer, setQuizAnswer] = useState('') //ai가 만들어낸 퀴즈
+    const [showAnswer, setShowAnswer] = useState(false) // ai가 만든 퀴즈의 답변이 있으면 보여주고 그렇지 않으면 감추는 역할
+    const [previousQuestion, setPreviousQuestion] = useState<string[]>([])
+    const [currentQuiz, setCurrentQuiz] = useState('')
 
    const handleQuestion = async () => {
       if(!message.trim()){

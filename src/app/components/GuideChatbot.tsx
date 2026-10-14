@@ -38,6 +38,7 @@ const GuideChatbot = () => {
         };
 
         setMessage((prev) => [...prev, userMessage]);
+        setQuestion('');
         setLoading(true)
 
         // 서버로 (guide/route.ts) 요청 :: 사용자 질문을 받아서 openAi 에게 보내고 받는 역할

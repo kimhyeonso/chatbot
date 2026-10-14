@@ -6,7 +6,7 @@ import styles from './page.module.scss'
 
 
 const WeatherPage = () => {
-  const [city, setCity] = useState('Seoul')
+  const [city, setCity] = useState('서울')
   const [loading, setLoading] = useState(false)
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState('')
@@ -41,7 +41,7 @@ const WeatherPage = () => {
         <span>도시 이름을 입력하시면 도시의 날씨를 알 수 있습니다</span>
       </div>
       <div className={styles.serachBox}>
-        <input type="text" placeholder="Seoul" value={city} onChange={(e) => setCity(e.target.value)}/>
+        <input type="text" placeholder="예: 서울, 부산, Tokyo" value={city} onChange={(e) => setCity(e.target.value)}/>
         <button onClick={funWeather} disabled ={loading}>
           {loading ? '검색중' : "날씨 검색"}</button>
       </div>

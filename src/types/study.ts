@@ -13,4 +13,7 @@ export type AiRequet = {
 
 export type AiResponse = {
     answer : string
+    quesion : string
+    questionAnswer : string
+    hint : string
 }
