@@ -23,6 +23,12 @@ const StudyPage = () => {
 
    const handleQuestion = async () => {
       if(!message.trim()){
+        setAnswer('질문을 입력해주세요')
+        return
+      }
+
+      if(mode === 'hint' && !currentQuiz) {
+        setAnswer('먼저 퀴즈를 출력해주세요')
         return
       }
 
@@ -36,6 +42,8 @@ const StudyPage = () => {
              body : JSON.stringify({
                  message,
                  mode,
+                 currentQuiz,
+                 previousQuestion //이전 퀴즈도 전달해야함
              })
         })
 
@@ -45,7 +53,14 @@ const StudyPage = () => {
 
         const data :  AiResponse = await res.json()
         setAnswer(data.answer);
-      }catch {
+
+        if(mode === 'quiz'){
+          setCurrentQuiz(data.answer)
+          setQuizAnswer(data.quesion || '')
+          setShowAnswer(false)
+          setPreviousQuestion((prev) => [...prev, data.answer].slice(-10))
+        }
+      }catch(err){
            setAnswer('AI 답변을 가져오지 못했습니다');
       }finally{
             setLoading(false)
@@ -90,6 +105,20 @@ const StudyPage = () => {
                     <p>
                       {answer}
                     </p>
+                    {
+                      mode === 'quiz' && quizAnswer && (
+                        <>
+                          <button onClick={() => setShowAnswer(!showAnswer)}>
+                            {showAnswer ? '정답숨기기' : '답변보기'}
+                          </button>
+                          {
+                            showAnswer&&(
+                              <p>{quizAnswer}</p>
+                            )
+                          }
+                        </>
+                      )
+                    }
               </section>
             )
           }
