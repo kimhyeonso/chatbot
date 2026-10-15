@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useState } from "react"
+import { useState } from "react"
 import { studyData } from "@/data/studyData"
 import type { AiResponse, Studymode } from '@/types/study'
 import styles from './page.module.scss'
@@ -56,11 +56,11 @@ const StudyPage = () => {
 
         if(mode === 'quiz'){
           setCurrentQuiz(data.answer)
-          setQuizAnswer(data.quesion || '')
+          setQuizAnswer(data.quizAnswer || '')
           setShowAnswer(false)
           setPreviousQuestion((prev) => [...prev, data.answer].slice(-10))
         }
-      }catch(err){
+      }catch{
            setAnswer('AI 답변을 가져오지 못했습니다');
       }finally{
             setLoading(false)

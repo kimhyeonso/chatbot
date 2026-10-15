@@ -6,14 +6,14 @@ export type StudyItem = {
     mode: Studymode
 }
 
-export type AiRequet = {
-    message : string
-    mode : Studymode
+export type AiRequest = {
+    message: string
+    mode: Studymode
+    currentQuiz?: string
+    previousQuestions?: string[]
 }
 
 export type AiResponse = {
-    answer : string
-    quesion : string
-    questionAnswer : string
-    hint : string
+    answer: string
+    quizAnswer?: string
 }

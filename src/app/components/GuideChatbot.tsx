@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './GuideChatbot.module.scss'
 import React from 'react'
-import { Content } from 'openai/resources/skills.mjs'
 type ChatMessage = {
     role : 'user' | 'assistant'
     content: string
